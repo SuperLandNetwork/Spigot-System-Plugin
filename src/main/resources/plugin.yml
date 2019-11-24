@@ -1,0 +1,29 @@
+name: System
+version: ${project.version}
+main: de.superlandnetwork.spigot.system.Main
+prefix: System
+authors: [ursinn]
+description: ${project.description}
+website: ${project.url}
+api-version: 1.14
+commands:
+  gamemode:
+    description: Gamemode Command
+    aliases: [gm]
+    permission: system.gamemode
+    permission-message: You not have have permission to use this command.
+    usage: "Usage: /<command> [0|1|2|3] [Target]"
+permissions:
+  system.*:
+    description: Wildcard permission
+    default: false
+    children:
+      system.command.*: true
+  system.command.*:
+    description: Wildcard permission
+    default: op
+    children:
+      system.command.gamemode: true
+  system.command.gamemode:
+    description: Gamemode Command
+    default: op
