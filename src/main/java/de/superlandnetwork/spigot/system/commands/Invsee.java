@@ -29,7 +29,6 @@
 package de.superlandnetwork.spigot.system.commands;
 
 import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -39,7 +38,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Gamemode implements CommandExecutor, TabCompleter {
+public class Invsee implements CommandExecutor, TabCompleter {
 
     /**
      * Executes the given command, returning its success.
@@ -61,43 +60,17 @@ public class Gamemode implements CommandExecutor, TabCompleter {
                 return true;
             }
 
-            Player p = (Player) sender;
-            setGameMode(sender, args[0], p);
-            return true;
-        }
-
-        if (args.length == 2) {
-            if (!sender.hasPermission("system.command.gamemode.other")) {
-                sender.sendMessage("§cYou not have permission to use this command.");
-                return true;
-            }
-
-            Player t = Bukkit.getPlayer(args[1]);
+            Player t = Bukkit.getPlayer(args[0]);
             if (t == null) {
                 sender.sendMessage("§cPlayer not Found");
                 return true;
             }
 
-            setGameMode(sender, args[0], t);
+            Player p = (Player) sender;
+            p.openInventory(t.getInventory());
             return true;
         }
         return false;
-    }
-
-    private void setGameMode(CommandSender sender, String s, Player t) {
-        GameModeEnum gameModeEnum = null;
-        gameModeEnum = GameModeEnum.getByID(s);
-
-        if (gameModeEnum == null)
-            gameModeEnum = GameModeEnum.getByName(s);
-
-        if (gameModeEnum == null) {
-            sender.sendMessage("§cGamemode not Found!");
-            return;
-        }
-
-        t.setGameMode(gameModeEnum.getGameMode());
-        sender.sendMessage("§eGamemode changed");
     }
 
     /**
@@ -117,64 +90,10 @@ public class Gamemode implements CommandExecutor, TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args) {
         List<String> list = new ArrayList<>();
         if (args.length == 1) {
-            for (GameModeEnum e : GameModeEnum.values()) {
-                list.add(e.getId());
-                list.add(e.getName());
-            }
-        }
-
-        if (args.length == 2) {
             for (Player p : Bukkit.getOnlinePlayers()) {
                 list.add(p.getName());
             }
         }
         return list;
     }
-
-    public enum GameModeEnum {
-        SURVIVAL("0", "survival", GameMode.SURVIVAL),
-        CREATIVE("1", "creative", GameMode.CREATIVE),
-        ADVENTURE("2", "adventure", GameMode.ADVENTURE),
-        SPECTATOR("3", "spectator", GameMode.SPECTATOR);
-
-        private String id, name;
-        private GameMode gameMode;
-
-        GameModeEnum(String id, String name, GameMode gameMode) {
-            this.id = id;
-            this.name = name;
-            this.gameMode = gameMode;
-        }
-
-        public static GameModeEnum getByID(String id) {
-            for (GameModeEnum e : GameModeEnum.values()) {
-                if (e.getId().equals(id))
-                    return e;
-            }
-
-            return null;
-        }
-
-        public static GameModeEnum getByName(String name) {
-            for (GameModeEnum e : GameModeEnum.values()) {
-                if (e.getName().equalsIgnoreCase(name))
-                    return e;
-            }
-
-            return null;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public GameMode getGameMode() {
-            return gameMode;
-        }
-    }
-
 }

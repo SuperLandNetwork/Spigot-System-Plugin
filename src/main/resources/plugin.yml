@@ -10,9 +10,45 @@ commands:
   gamemode:
     description: Gamemode Command
     aliases: [gm]
-    permission: system.gamemode
-    permission-message: You not have have permission to use this command.
-    usage: "Usage: /<command> [0|1|2|3] [Target]"
+    permission: system.command.gamemode
+    permission-message: "§cYou not have permission to use this command."
+    usage: "§cUsage: /<command> [0|1|2|3] [Target]"
+  fly:
+    description: Fly Command
+    permission: system.command.fly
+    permission-message: "§cYou not have permission to use this command."
+    usage: "§cUsage: /<command> [Target]"
+  chatclear:
+    description: ChatClear Command
+    aliases: [cc]
+    permission: system.command.chatclear
+    permission-message: "§cYou not have permission to use this command."
+    usage: "§cUsage: /<command>"
+  day:
+    description: Day Command
+    permission: system.command.day
+    permission-message: "§cYou not have permission to use this command."
+    usage: "§cUsage: /<command>"
+  night:
+    description: Night Command
+    permission: system.command.night
+    permission-message: "§cYou not have permission to use this command."
+    usage: "§cUsage: /<command>"
+  heal:
+    description: Heal Command
+    permission: system.command.heal
+    permission-message: "§cYou not have permission to use this command."
+    usage: "§cUsage: /<command> [Target]"
+  feed:
+    description: Feed Command
+    permission: system.command.feed
+    permission-message: "§cYou not have permission to use this command."
+    usage: "§cUsage: /<command> [Target]"
+  invsee:
+    description: Invsee Command
+    permission: system.command.invsee
+    permission-message: "§cYou not have permission to use this command."
+    usage: "§cUsage: /<command> [Target]"
 permissions:
   system.*:
     description: Wildcard permission
@@ -23,7 +59,71 @@ permissions:
     description: Wildcard permission
     default: op
     children:
+      system.command.gamemode.*: true
+      system.command.fly.*: true
+      system.command.chatclear: true
+      system.command.day: true
+      system.command.night: true
+      system.command.heal.*: true
+      system.command.feed.*: true
+      system.command.invsee: true
+  system.command.gamemode.*:
+    description: Wildcard permission
+    default: op
+    children:
       system.command.gamemode: true
+      system.command.gamemode.other: true
+  system.command.fly.*:
+    description: Wildcard permission
+    default: op
+    children:
+      system.command.fly: true
+      system.command.fly.other: true
+  system.command.heal.*:
+    description: Wildcard permission
+    default: op
+    children:
+      system.command.heal: true
+      system.command.heal.other: true
+  system.command.feed.*:
+    description: Wildcard permission
+    default: op
+    children:
+      system.command.feed: true
+      system.command.feed.other: true
   system.command.gamemode:
     description: Gamemode Command
+    default: op
+  system.command.gamemode.other:
+    description: Gamemode Command
+    default: op
+  system.command.fly:
+    description: Fly Command
+    default: op
+  system.command.fly.other:
+    description: Fly Command
+    default: op
+  system.command.chatclear:
+    description: ChatClear Command
+    default: op
+  system.command.day:
+    description: Day Command
+    default: op
+  system.command.night:
+    description: Night Command
+    default: op
+  system.command.heal:
+    description: Heal Command
+    default: op
+  system.command.heal.other:
+    description: Heal Command
+    default: op
+  system.command.feed:
+    description: Feed Command
+    default: op
+  system.command.feed.other:
+    description: Feed Command
+    default: op
+  system.command.invsee:
+    description: Invsee Command
     default: op

@@ -28,8 +28,7 @@
 
 package de.superlandnetwork.spigot.system;
 
-import de.superlandnetwork.spigot.system.commands.Gamemode;
-import org.bukkit.command.PluginCommand;
+import de.superlandnetwork.spigot.system.commands.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
@@ -39,9 +38,15 @@ public final class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        PluginCommand gamemode = getCommand("gamemode");
-        gamemode.setExecutor(new Gamemode());
-        gamemode.setTabCompleter(new Gamemode());
+
+        getCommand("gamemode").setExecutor(new Gamemode());
+        getCommand("fly").setExecutor(new Fly());
+        getCommand("chatclear").setExecutor(new ChatClear());
+        getCommand("day").setExecutor(new Day());
+        getCommand("night").setExecutor(new Night());
+        getCommand("heal").setExecutor(new Heal());
+        getCommand("feed").setExecutor(new Feed());
+        getCommand("invsee").setExecutor(new Invsee());
     }
 
     @Override
