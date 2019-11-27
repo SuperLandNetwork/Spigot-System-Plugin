@@ -33,11 +33,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.superlandnetwork.spigot</groupId>
-    <artifactId>System</artifactId>
+    <artifactId>system</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>System</name>
+    <name>SpigotSystem</name>
 
     <description>SuperLandNetwork.de Spigot System Plugin</description>
     <properties>
@@ -102,4 +102,17 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>nexus.filli-it.ch</id>
+            <name>Filli IT Nexus Repository</name>
+            <url>https://nexus.filli-it.ch/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus.filli-it.ch</id>
+            <name>Filli IT Nexus Repository</name>
+            <url>https://nexus.filli-it.ch/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
