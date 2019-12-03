@@ -28,16 +28,24 @@
 
 package de.superlandnetwork.spigot.system;
 
+import com.google.common.reflect.ClassPath;
 import de.superlandnetwork.spigot.system.commands.*;
+import org.bukkit.event.Listener;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
 
     private static Main instance;
 
+    public static Main getInstance() {
+        return instance;
+    }
+
     @Override
     public void onEnable() {
         instance = this;
+        registerListener();
 
         getCommand("gamemode").setExecutor(new Gamemode());
         getCommand("fly").setExecutor(new Fly());
@@ -54,7 +62,19 @@ public final class Main extends JavaPlugin {
         // Plugin shutdown logic
     }
 
-    public static Main getInstance() {
-        return instance;
+    private void registerListener() {
+        PluginManager pluginManager = getServer().getPluginManager();
+        try {
+            for (ClassPath.ClassInfo classInfo : ClassPath.from(getClassLoader())
+                    .getTopLevelClasses("de.superlandnetwork.spigot.system.listeners")) {
+                @SuppressWarnings("rawtypes")
+                Class clazz = Class.forName(classInfo.getName());
+                if (Listener.class.isAssignableFrom(clazz)) {
+                    pluginManager.registerEvents((Listener) clazz.newInstance(), this);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

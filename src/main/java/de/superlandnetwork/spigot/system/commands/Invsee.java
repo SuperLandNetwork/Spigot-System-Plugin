@@ -46,23 +46,23 @@ public class Invsee implements CommandExecutor, TabCompleter {
      * If false is returned, then the "usage" plugin.yml entry for this command
      * (if defined) will be sent to the player.
      *
-     * @param sender  Source of the command
-     * @param cmd     Command which was executed
-     * @param label   Alias of the command which was used
-     * @param args    Passed command arguments
+     * @param sender Source of the command
+     * @param cmd    Command which was executed
+     * @param label  Alias of the command which was used
+     * @param args   Passed command arguments
      * @return true if a valid command, otherwise false
      */
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length == 1) {
             if (!(sender instanceof Player)) {
-                sender.sendMessage("§cJust for Player");
+                sender.sendMessage("§7[§6System§7] §cJust for Player");
                 return true;
             }
 
             Player t = Bukkit.getPlayer(args[0]);
             if (t == null) {
-                sender.sendMessage("§cPlayer not Found");
+                sender.sendMessage("§7[§6System§7] §cPlayer not Found");
                 return true;
             }
 
@@ -76,13 +76,13 @@ public class Invsee implements CommandExecutor, TabCompleter {
     /**
      * Requests a list of possible completions for a command argument.
      *
-     * @param sender  Source of the command.  For players tab-completing a
-     *                command inside of a command block, this will be the player, not
-     *                the command block.
-     * @param cmd     Command which was executed
-     * @param alias   The alias used
-     * @param args    The arguments passed to the command, including final
-     *                partial argument to be completed and command label
+     * @param sender Source of the command.  For players tab-completing a
+     *               command inside of a command block, this will be the player, not
+     *               the command block.
+     * @param cmd    Command which was executed
+     * @param alias  The alias used
+     * @param args   The arguments passed to the command, including final
+     *               partial argument to be completed and command label
      * @return A List of possible completions for the final argument, or null
      * to default to the command executor
      */

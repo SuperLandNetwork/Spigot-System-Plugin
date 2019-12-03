@@ -56,13 +56,13 @@ public class Feed implements CommandExecutor, TabCompleter {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) {
             if (!(sender instanceof Player)) {
-                sender.sendMessage("§cJust for Player");
+                sender.sendMessage("§7[§6System§7] §cJust for Player");
                 return true;
             }
 
             Player p = (Player) sender;
             p.setFoodLevel(20);
-            sender.sendMessage("§eDone");
+            sender.sendMessage("§7[§6System§7] §eDone");
             return true;
         }
 
@@ -74,12 +74,12 @@ public class Feed implements CommandExecutor, TabCompleter {
 
             Player t = Bukkit.getPlayer(args[0]);
             if (t == null) {
-                sender.sendMessage("§cPlayer not Found");
+                sender.sendMessage("§7[§6System§7] §cPlayer not Found");
                 return true;
             }
 
             t.setFoodLevel(20);
-            sender.sendMessage("§eDone");
+            sender.sendMessage("§7[§6System§7] §eDone");
             return true;
         }
         return false;

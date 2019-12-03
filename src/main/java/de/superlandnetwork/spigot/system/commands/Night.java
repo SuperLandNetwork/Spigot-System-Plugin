@@ -45,22 +45,22 @@ public class Night implements CommandExecutor, TabCompleter {
      * If false is returned, then the "usage" plugin.yml entry for this command
      * (if defined) will be sent to the player.
      *
-     * @param sender  Source of the command
-     * @param cmd     Command which was executed
-     * @param label   Alias of the command which was used
-     * @param args    Passed command arguments
+     * @param sender Source of the command
+     * @param cmd    Command which was executed
+     * @param label  Alias of the command which was used
+     * @param args   Passed command arguments
      * @return true if a valid command, otherwise false
      */
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("§cJust for Player");
+            sender.sendMessage("§7[§6System§7] §cJust for Player");
             return true;
         }
 
         Player p = (Player) sender;
         p.getWorld().setTime(20000L);
-        sender.sendMessage("§eTime Changed");
+        sender.sendMessage("§7[§6System§7] §eTime Changed");
         return true;
     }
 
